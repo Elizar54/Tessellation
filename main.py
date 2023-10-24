@@ -71,11 +71,13 @@ for i in range(2):
             draw_hexagon(x, y, 20, filling_color_2)
         x += 2 * 20 * math.sin(math.pi/3)
     t.up()
-    t.goto(x - (quant_of_hexes - 1) * 20 * math.sin(math.pi/3), y)
+    #Вот в этом моменте ошибка, нужно высчитать координаты старта рисования следубщего ряда
+    t.goto(x - (quant_of_hexes - 1) * 20 * math.sin(math.pi/3), y) 
     t.goto(x - (quant_of_hexes - 1) * 20 * math.sin(math.pi/3), y + 3 * 20 * math.cos(math.pi/3) + 20)
 
     x = x - (quant_of_hexes - 1) * 20 * math.sin(math.pi/3)
     y = y + 3 * 20 * math.cos(math.pi/3) + 20
+    
 t.done()
 
     
