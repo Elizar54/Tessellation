@@ -1,7 +1,7 @@
 import turtle as t
 import math
 
-raw_coords = []
+row_coords = []
 t.speed(15)
 
 
@@ -23,6 +23,7 @@ def get_num_hexagons():
         error_cnt += 1
     else:
         return num
+
 
 def get_color_choice():
     color_dict = {'красный': 'red', 'синий': 'blue', 'желтый': 'yellow', 'оранжевый': 'orange', 
@@ -55,8 +56,8 @@ def draw_hexagon(x, y, side_len, color_fill):
     for move in range(6):
         if move == 2:
             x_second, y_second = t.xcor(), t.ycor()
-            raw_coords.append(x_second)
-            raw_coords.append(y_second)
+            row_coords.append(x_second)
+            row_coords.append(y_second)
         t.color('black', color_fill)
         t.forward(side_len)
         t.rt(60)
@@ -64,13 +65,10 @@ def draw_hexagon(x, y, side_len, color_fill):
     t.lt(90)
     t.end_fill()
 
-# временный квадрат - не забудь убрать)
+
 t.up()
 t.goto(-250, 250)
 t.down()
-for i in range(4):
-    t.forward(500)
-    t.rt(90)
 
 quant_of_hexes = get_num_hexagons()
 filling_color_1 = get_color_choice()
@@ -82,22 +80,24 @@ side_len = small_diagonal / math.sqrt(3)
 x = -250 + small_diagonal
 y = 250
 
-for row in range(quant_of_hexes):
+rows = math.floor(500 // (1.5 * side_len)) + 1
+
+for row in range(rows):
     for hex in range(quant_of_hexes):
         if hex % 2 != 0:
             draw_hexagon(x, y, side_len, filling_color_1)
         else:
             draw_hexagon(x, y, side_len, filling_color_2)
         x += 2 * side_len * math.sin(math.pi / 3)
-    t.up()  # закончил рисовать ряд - красава!
+    t.up()
 
-    if i % 2 == 0:
-        raw_coords = raw_coords[:2]
-        x, y = raw_coords[0], raw_coords[1]
-        raw_coords.clear()
+    if row % 2 == 0:
+        row_coords = row_coords[:2]
+        x, y = row_coords[0], row_coords[1]
+        row_coords.clear()
     else:
-        raw_coords = raw_coords[2:4]
-        x, y = raw_coords[0], raw_coords[1]
-        raw_coords.clear()
+        row_coords = row_coords[2:4]
+        x, y = row_coords[0], row_coords[1]
+        row_coords.clear()
     
 t.mainloop()
