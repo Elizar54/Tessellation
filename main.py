@@ -1,3 +1,8 @@
+'''
+Елизарьев Ярослав - 70
+Леонов Кирилл - 60
+'''
+
 import turtle as t
 import math
 
